@@ -9,7 +9,8 @@ ACCESS_SECRET = "P03UwQJ4bsQvAIMXwRj4ZlJbXU3TyJHoFIRvL54dE2Ddp"
 
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
-api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
+# api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
+api = tweepy.API(auth, wait_on_rate_limit=True)
 user = api.me()
 search = '#SwiftLang'
 numTweet = 500
