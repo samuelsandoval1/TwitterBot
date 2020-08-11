@@ -11,7 +11,7 @@ auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 user = api.me()
-search = '#CSUF'
+search = '#SwiftLang'
 numTweet = 500
 
 for tweet in tweepy.Cursor(api.search, search).items(numTweet):
