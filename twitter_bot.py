@@ -12,13 +12,14 @@ auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 user = api.me()
 search = '#SwiftLang'
-numTweet = 100
+numTweet = 500
 
 
 for tweet in tweepy.Cursor(api.search, search).items(numTweet):
     try:
         tweet.favorite()
         print('Tweet Liked')
+        time.sleep(15)
     except tweepy.TweepError as e:
         if e.response.status_code == 420 or e.response.status_code == 429 :
             time.sleep(15 * 60)
