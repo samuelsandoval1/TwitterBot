@@ -9,18 +9,24 @@ ACCESS_SECRET = "P03UwQJ4bsQvAIMXwRj4ZlJbXU3TyJHoFIRvL54dE2Ddp"
 
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
-# api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
-api = tweepy.API(auth, wait_on_rate_limit=True)
+api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 user = api.me()
 search = '#SwiftLang'
-numTweet = 500
+numTweet = 100
+
 
 for tweet in tweepy.Cursor(api.search, search).items(numTweet):
     try:
-        print('Tweet Liked')
         tweet.favorite()
-        time.sleep(10)
+        print('Tweet Liked')
     except tweepy.TweepError as e:
+        if e.response.status_code == 420 or e.response.status_code == 429 :
+            time.sleep(15 * 60)
+            continue
+        else:
+            print("Break due to exception: ", tweepy.TweepError)
+            break
         print(e.reason)
+
     except StopIteration:
-        break 
+        break
